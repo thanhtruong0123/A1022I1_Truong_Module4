@@ -21,4 +21,5 @@ public class ProductController {
         model.addAttribute("products", products);
         return "/index";
     }
+
 }
