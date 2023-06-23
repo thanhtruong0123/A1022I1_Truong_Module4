@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ProductService implements IProductService {
     private List<Product> products = new ArrayList<>();
+
     @Override
     public List<Product> findAll() {
         return products;

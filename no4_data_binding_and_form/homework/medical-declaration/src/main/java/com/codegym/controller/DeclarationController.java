@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/medical-declaration")
 public class DeclarationController {
-    private DeclarationService declarationService = new DeclarationServiceImpl();
+    private DeclarationService declarationService;
 
     public DeclarationController(DeclarationService declarationService) {
         this.declarationService = declarationService;

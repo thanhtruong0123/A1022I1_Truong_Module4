@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Song</title>
+</head>
+<body>
+  <h1>Upload Song Form</h1>
+  <form th:action="@{/music/upload}" th:object="${song}" method="post"  enctype="multipart/form-data">
+    <table>
+      <tr>
+        <td>Tittle</td>
+        <td><input type="text" th:field="*{title}" required/></td>
+      </tr>
+      <tr>
+        <td>Artist</td>
+        <td><input type="text" th:field="*{artist}" required/></td>
+      </tr>
+      <tr>
+        <td>Music Genre</td>
+        <td>
+          <select th:field="*{musicGenreList}">
+            <option th:each="genre : ${genreList}" th:value="${genre}" th:text="${genre}" required></option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Upload File</td>
+        <td><input type="file" id="file" name="file" required></td>
+      </tr>
+      <tr>
+        <td colspan="2"><button>Upload</button></td>
+      </tr>
+      <tr th:if="${errorMessage}">
+        <td th:text="${errorMessage}" style="color: red;"></td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>
