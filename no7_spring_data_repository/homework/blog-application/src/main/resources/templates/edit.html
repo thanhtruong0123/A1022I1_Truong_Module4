@@ -26,8 +26,12 @@
                 <td><input type="text" th:field="*{author}"/></td>
             </tr>
             <tr>
-                <td>Create At:</td>
-                <td><input type="text" th:field="*{createAt}"/></td>
+                <td>Category</td>
+                <td>
+                    <select th:field="*{category}">
+                        <option th:each="c : ${categories}" th:value="${c.id}"><span th:text="${c.name}"></span></option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td colspan="2"><button>Update</button></td>

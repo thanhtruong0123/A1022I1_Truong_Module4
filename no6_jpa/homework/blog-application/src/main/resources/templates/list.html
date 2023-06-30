@@ -35,10 +35,8 @@
 
         <main>
             <div class="container">
-                <!-- Blog posts -->
                 <div class="row">
                     <div class="col-md-8">
-                        <!-- Blog post -->
                         <div th:each="blog: ${blogList}">
                             <div class="card mb-4">
                                 <div class="card-body">
@@ -65,23 +63,17 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Add more blog posts here -->
                     </div>
 
                     <div class="col-md-4">
-                        <!-- Add new post button -->
                         <div class="mt-4">
                             <a href="#" class="btn btn-success btn-block" th:href="@{/create}">Add New Post</a>
                         </div>
-
-                        <!-- Sidebar content -->
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <p th:text="${mess}"></p>
                                 </h5>
-                                <!-- Add sidebar content here -->
                             </div>
                         </div>
                     </div>

@@ -10,10 +10,6 @@
     <form th:action="@{/create}" method="post" th:object="${blog}">
         <table>
             <tr>
-                <td>ID</td>
-                <td><input type="text" th:field="*{id}"></td>
-            </tr>
-            <tr>
                 <td>Title</td>
                 <td><input type="text" th:field="*{title}"></td>
             </tr>
@@ -26,8 +22,12 @@
                 <td><input type="text" th:field="*{author}"></td>
             </tr>
             <tr>
-                <td>Create At</td>
-                <td><input type="text" th:field="*{createAt}"></td>
+                <td>Category</td>
+                <td>
+                    <select th:field="*{category}">
+                        <option th:each="c : ${categories}" th:value="${c.id}"><span th:text="${c.name}"></span></option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td colspan="2"><button>Save</button></td>

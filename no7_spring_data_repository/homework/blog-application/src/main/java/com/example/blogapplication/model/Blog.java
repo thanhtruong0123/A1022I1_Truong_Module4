@@ -1,28 +1,34 @@
 package com.example.blogapplication.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 public class Blog {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     @Column(columnDefinition = "TEXT")
     private String content;
     private String author;
-    private String createAt;
+    private LocalDate createAt;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
 
     public Blog() {
     }
 
-    public Blog(Long id, String title, String content, String author, String createAt) {
+    public Blog(Long id, String title, String content, String author, LocalDate createAt, Category category) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.author = author;
         this.createAt = createAt;
+        this.category = category;
     }
 
     public Long getId() {
@@ -57,11 +63,19 @@ public class Blog {
         this.author = author;
     }
 
-    public String getCreateAt() {
+    public LocalDate getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(String createAt) {
+    public void setCreateAt(LocalDate createAt) {
         this.createAt = createAt;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
