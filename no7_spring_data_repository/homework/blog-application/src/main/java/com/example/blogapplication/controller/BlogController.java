@@ -6,13 +6,12 @@ import com.example.blogapplication.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.awt.print.Pageable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -79,5 +78,18 @@ public class BlogController {
         blogService.updateBlog(id, blog);
         redirectAttributes.addFlashAttribute("mess", "Edit successfully");
         return "redirect:/";
+    }
+
+    @PostMapping("/search")
+    public String searchBlog(@RequestParam("searchTitle") String searchTitle,
+                             @RequestParam(defaultValue = "0") int page,
+                             Model model) {
+        Pageable pageable = PageRequest.of(page, 2);
+        Page<Blog> blogPage = blogService.searchBlogsByTitleContaining(pageable, searchTitle);
+        model.addAttribute("blogPage", blogPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPage", blogPage.getTotalPages());
+        model.addAttribute("categories", categoryService.getList());
+        return "/list";
     }
 }

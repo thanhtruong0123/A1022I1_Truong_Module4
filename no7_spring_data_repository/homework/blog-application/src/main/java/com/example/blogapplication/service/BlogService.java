@@ -2,9 +2,7 @@ package com.example.blogapplication.service;
 
 import com.example.blogapplication.model.Blog;
 import com.example.blogapplication.repository.IBlogRepository;
-import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,6 +18,11 @@ public class BlogService implements IBlogService {
     @Override
     public List<Blog> showListBlog() {
         return blogRepository.findAll();
+    }
+
+    @Override
+    public Page<Blog> searchBlogsByTitleContaining(Pageable pageable, String title) {
+        return blogRepository.searchBlogsByTitleContaining(pageable, title);
     }
 
     @Override
