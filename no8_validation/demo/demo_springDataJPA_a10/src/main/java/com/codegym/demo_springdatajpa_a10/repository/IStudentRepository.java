@@ -15,9 +15,9 @@ import java.util.List;
 public interface IStudentRepository extends JpaRepository<Student,Integer> {
 
     // theo câu querry theo method name
-     List<Student> findStudentByNameContaining(String name);
-    // tạo câu query thuần
-     @Query(value = "select * from student where name like :name",nativeQuery = true)
-     List<Student> searchByName(@Param("name") String name);
-     Page<Student> findStudentByNameContaining(Pageable pageable,String name);
+ List<Student> findStudentByNameContaining(String name);
+// tạo câu query thuần
+ @Query(value = "select * from student where name like :name",nativeQuery = true)
+ List<Student> searchByName(@Param("name") String name);
+ Page<Student> findStudentByNameContaining(Pageable pageable,String name);
 }

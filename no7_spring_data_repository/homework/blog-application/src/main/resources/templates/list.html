@@ -25,7 +25,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search" th:action="@{/search}" method="post">
+                    <form class="d-flex" role="search" th:action="@{/}" method="get">
                         <input name="searchTitle" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" >
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
@@ -70,13 +70,13 @@
                         <div>
                             <ul class="pagination">
                                 <li th:if="${blogPage.hasPrevious()}" class="page-item">
-                                    <a class="page-link" th:href="@{/(page=${currentPage - 1})}">Previous</a>
+                                    <a class="page-link" th:href="@{/(page=${currentPage - 1},searchTitle=${searchTitle})}">Previous</a>
                                 </li>
                                 <li class="page-item">
                                     <span class="page-link" th:text="${currentPage + 1}"></span>
                                 </li>
                                 <li th:if="${blogPage.hasNext()}" class="page-item">
-                                    <a class="page-link" th:href="@{/(page=${currentPage + 1})}">Next</a>
+                                    <a class="page-link" th:href="@{/(page=${currentPage + 1},searchTitle=${searchTitle})}">Next</a>
                                 </li>
                             </ul>
                         </div>

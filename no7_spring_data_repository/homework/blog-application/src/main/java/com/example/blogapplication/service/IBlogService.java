@@ -11,10 +11,10 @@ import java.util.Optional;
 public interface IBlogService {
     List<Blog> showListBlog();
 
-    Page<Blog> searchBlogsByTitleContaining(Pageable pageable, String title);
+    Page<Blog> searchByTitle(Pageable pageable, String title);
 
 
-    Page<Blog> showListBlog(Pageable pageable);
+    Page<Blog> showListBlog(Pageable pageable, String tittle);
 
     Blog showBlog(Long id);
 

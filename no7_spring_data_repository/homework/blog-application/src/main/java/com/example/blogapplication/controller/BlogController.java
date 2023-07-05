@@ -24,10 +24,13 @@ public class BlogController {
     private ICategoryService categoryService;
 
     @GetMapping("/")
-    public String getBlog(@RequestParam(defaultValue = "0") int page, Model model) {
+    public String getBlog(@RequestParam(defaultValue = "0") int page,
+                          @RequestParam(defaultValue = "")String searchTitle,
+                          Model model) {
         int pageSize = 2;
         PageRequest pageable = PageRequest.of(page, pageSize);
-        Page<Blog> blogPage = blogService.showListBlog(pageable);
+        Page<Blog> blogPage = blogService.searchByTitle(pageable, searchTitle);
+        model.addAttribute("searchTitle", searchTitle);
         model.addAttribute("blogPage", blogPage);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPage", blogPage.getTotalPages());
@@ -80,16 +83,16 @@ public class BlogController {
         return "redirect:/";
     }
 
-    @PostMapping("/search")
-    public String searchBlog(@RequestParam("searchTitle") String searchTitle,
-                             @RequestParam(defaultValue = "0") int page,
-                             Model model) {
-        Pageable pageable = PageRequest.of(page, 2);
-        Page<Blog> blogPage = blogService.searchBlogsByTitleContaining(pageable, searchTitle);
-        model.addAttribute("blogPage", blogPage);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPage", blogPage.getTotalPages());
-        model.addAttribute("categories", categoryService.getList());
-        return "/list";
-    }
+//    @PostMapping("/search")
+//    public String searchBlog(@RequestParam("searchTitle") String searchTitle,
+//                             @RequestParam(defaultValue = "0") int page,
+//                             Model model) {
+//        Pageable pageable = PageRequest.of(page, 2);
+//        Page<Blog> blogPage = blogService.searchBlogsByTitleContaining(pageable, searchTitle);
+//        model.addAttribute("blogPage", blogPage);
+//        model.addAttribute("currentPage", page);
+//        model.addAttribute("totalPage", blogPage.getTotalPages());
+//        model.addAttribute("categories", categoryService.getList());
+//        return "/list";
+//    }
 }
