@@ -12,35 +12,35 @@
             <tr>
                 <td>First Name: </td>
                 <td>
-                    <input th:field="*{firstName}">
+                    <input type="text" th:field="*{firstName}">
                     <small style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors ="*{firstName}"></small>
                 </td>
             </tr>
             <tr>
                 <td>Last Name: </td>
                 <td>
-                    <input th:field="*{lastName}">
+                    <input type="text" th:field="*{lastName}">
                     <small style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors ="*{lastName}"></small>
                 </td>
             </tr>
             <tr>
                 <td>Phone Number: </td>
                 <td>
-                    <input th:field="*{phoneNumber}">
+                    <input type="text" th:field="*{phoneNumber}">
                     <small style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors ="*{phoneNumber}"></small>
                 </td>
             </tr>
             <tr>
                 <td>Age: </td>
                 <td>
-                    <input th:field="*{age}">
+                    <input type="text" th:field="*{age}">
                     <small style="color:red" th:if="${#fields.hasErrors('age')}" th:errors ="*{age}"></small>
                 </td>
             </tr>
             <tr>
                 <td>Email: </td>
                 <td>
-                    <input th:field="*{email}">
+                    <input type="text" th:field="*{email}">
                     <small style="color:red" th:if="${#fields.hasErrors('email')}" th:errors ="*{email}"></small>
                 </td>
             </tr>
