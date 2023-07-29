@@ -1,11 +1,12 @@
-package com.example.libraryborrowingproject.service;
+package com.example.libraryproject2.service;
 
-import com.example.libraryborrowingproject.model.Book;
-import com.example.libraryborrowingproject.repository.IBookRepository;
-import com.example.libraryborrowingproject.service.itf.IBookService;
+import com.example.libraryproject2.model.Book;
+import com.example.libraryproject2.repository.IBookRepository;
+import com.example.libraryproject2.service.itf.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -13,8 +14,13 @@ public class BookService implements IBookService {
     @Autowired
     private IBookRepository bookRepository;
     @Override
-    public List<Book> showList() {
+    public List<Book> findAll() {
         return bookRepository.findAll();
+    }
+
+    @Override
+    public List<Book> findAllById(List<Long> listId) {
+        return bookRepository.findAllById(listId);
     }
 
     @Override

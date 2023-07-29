@@ -1,8 +1,8 @@
-package com.example.libraryborrowingproject.service;
+package com.example.libraryproject2.service;
 
-import com.example.libraryborrowingproject.model.Student;
-import com.example.libraryborrowingproject.repository.IStudentRepository;
-import com.example.libraryborrowingproject.service.itf.IStudentService;
+import com.example.libraryproject2.model.Student;
+import com.example.libraryproject2.repository.IStudentRepository;
+import com.example.libraryproject2.service.itf.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class StudentService implements IStudentService {
     IStudentRepository studentRepository;
 
     @Override
-    public List<Student> getStudentList() {
+    public List<Student> findALl() {
         return studentRepository.findAll();
     }
 }

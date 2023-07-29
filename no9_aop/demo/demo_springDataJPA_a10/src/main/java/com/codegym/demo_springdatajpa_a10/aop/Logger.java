@@ -13,18 +13,18 @@ import org.springframework.stereotype.Component;
 public class Logger {
     private static int count = 0;
 
-    // đếm số lần truy cập vào trang web
-//    @After("execution(* com.codegym.demo_springdatajpa_a10.controller.StudentController.*(..))")
-//    public void count(JoinPoint joinPoint){
-//        count++;
-//        System.out.println("method thực hiện " + joinPoint.getSignature().getName());
-//        System.out.println("số lần truy cập"+ count);
-//    }
-//    @After("execution(* com.codegym.demo_springdatajpa_a10.controller.StudentController.save(..))")
-//    public void loggingCreate(JoinPoint joinPoint) {
-//        Object[] args = joinPoint.getArgs();
-//        System.out.println("Tên thêm mới: " + ((StudentDto) args[0]).getName());
-//    }
+//     đếm số lần truy cập vào trang web
+    @After("execution(* com.codegym.demo_springdatajpa_a10.controller.StudentController.*(..))")
+    public void count(JoinPoint joinPoint){
+        count++;
+        System.out.println("method thực hiện " + joinPoint.getSignature().getName());
+        System.out.println("số lần truy cập"+ count);
+    }
+    @After("execution(* com.codegym.demo_springdatajpa_a10.controller.StudentController.save(..))")
+    public void loggingCreate(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
+        System.out.println("Tên thêm mới: " + ((StudentDto) args[0]).getName());
+    }
     @Around("execution(* com.codegym.demo_springdatajpa_a10.controller.StudentController.save(..))")
     public Object loggingAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         System.out.println("---------before");

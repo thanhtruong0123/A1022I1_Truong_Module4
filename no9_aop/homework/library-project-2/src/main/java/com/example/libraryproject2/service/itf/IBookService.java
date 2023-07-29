@@ -1,11 +1,13 @@
-package com.example.libraryborrowingproject.service.itf;
+package com.example.libraryproject2.service.itf;
 
-import com.example.libraryborrowingproject.model.Book;
+import com.example.libraryproject2.model.Book;
 
 import java.util.List;
 
 public interface IBookService {
-    List<Book> showList();
+    List<Book> findAll();
+
+    List<Book> findAllById(List<Long> listId);
 
     Book getBookById(Long id);
 

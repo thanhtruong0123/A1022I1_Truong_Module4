@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/library">Library</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/library">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/library/loan-card">Borrowed Book</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <h3 th:text="${mess}"></h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Book name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Student</th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Loan Date</th>
+                    <th scope="col">Returned Date</th>
+                    <th scope="col">Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="loanCard, status : ${loanCardList}">
+                    <th scope="row" th:text="${status.count}"></th>
+                    <td th:text="${loanCard.book.name}"></td>
+                    <td th:text="${loanCard.book.description}"></td>
+                    <td th:text="${loanCard.book.author}"></td>
+                    <td th:text="${loanCard.student.name}"></td>
+                    <td th:text="${loanCard.student.classRoom}"></td>
+                    <td th:text="${loanCard.loanDate}"></td>
+                    <td th:text="${loanCard.returnDate}"></td>
+                    <td>
+                        <span th:if="${loanCard.status == false}">
+                            <a class="btn btn-primary return-btn" th:data-card-id="${loanCard.id}">Return</a>
+                        </span>
+                        <span th:if="${loanCard.status == true}" style="color: darkgray">Returned</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="modal" id="returnModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Return Book</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to return this book?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a class="btn btn-primary">Sure</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Get all the "Return" buttons
+        const returnButtons = $(".return-btn");
+
+        // Get the modal
+        const modal = $("#returnModal");
+
+        // Add click event listener to each "Return" button
+        returnButtons.on("click", function () {
+            const cardId = $(this).data("card-id");
+
+            // Assuming you have a URL to handle the return request, you can set it as the "Sure" button's href
+            const sureButton = modal.find(".btn-primary");
+            sureButton.attr("href", `/library/return/${cardId}`);
+
+            // Show the modal
+            modal.modal("show");
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+</html>
