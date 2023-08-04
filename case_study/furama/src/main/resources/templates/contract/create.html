@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Contract</title>
+</head>
+<body>
+  <div class="container">
+    <div th:insert="~{/fragment/navbar :: navbar}"></div>
+
+    <form method="post" th:object="${contract}" class="col col-md-4">
+      <div class="mb-2">
+        <label class="form-label">Customer</label>
+        <select class="form-select" th:field="*{customer}">
+          <option th:each="c : ${customer}" th:value="${c.id}" th:text="${c.name}"></option>
+        </select>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Employee</label>
+        <select class="form-select" th:field="*{employee}">
+          <option th:each="e : ${employee}" th:value="${e.id}" th:text="${e.name}"></option>
+        </select>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Service</label>
+        <select class="form-select" th:field="*{serviceModel}">
+          <option th:each="s : ${service}" th:value="${s.id}" th:text="${s.name}"></option>
+        </select>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Deposit</label>
+        <input type="number" class="form-control" th:field="*{deposit}">
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Total Money</label>
+        <input type="number" class="form-control" th:field="*{totalMoney}">
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Start Date</label>
+        <input type="date" class="form-control" th:field="*{startDate}">
+      </div>
+      <div class="mb-2">
+        <label class="form-label">End Date</label>
+        <input type="date" class="form-control" th:field="*{endDate}">
+      </div>
+      <button class="btn btn-primary">Create</button>
+    </form>
+  </div>
+</body>
+</html>

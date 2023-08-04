@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>List Contract</title>
+</head>
+<body>
+  <div class="container">
+    <div th:insert="~{/fragment/navbar :: navbar}"></div>
+
+    <h1>Contract list</h1>
+    <!--    SEARCH FORM   -->
+    <form class="d-flex" role="search" th:action="@{/templates/contract}" method="get">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <!--        MESS        -->
+    <h4><i style="color: blue" th:text="${mess}"></i></h4>
+    <!--        TABLE       -->
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Employee</th>
+        <th scope="col">Service</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Deposit</th>
+        <th scope="col">Total Money</th>
+        <th scope="col">Select</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <form method="post" th:action="@{/contract/contract-detail/remove}">
+        <tbody>
+        <tr th:each="c, status : ${contractDetailPage}">
+          <th scope="row" th:text="${status.count}"></th>
+          <td th:text="${c.contract.customer.name}"></td>
+          <td th:text="${c.contract.employee.name}"></td>
+          <td th:text="${c.contract.serviceModel.name}"></td>
+          <td th:text="${c.contract.startDate}"></td>
+          <td th:text="${c.contract.endDate}"></td>
+          <td th:text="${c.contract.deposit}"></td>
+          <td th:text="${c.contract.totalMoney}"></td>
+          <td><input type="checkbox" name="selectedContractDetailIds" th:value="${c.id}"></td>
+          <td><a class="btn btn-warning" th:href="@{/contract/contract-detail/update/__${c.id}__}">Update</a></td>
+        </tr>
+        <tr style="display: none" >
+          <td><button id="button-remove">Remove</button></td>
+        </tr>
+        </tbody>
+      </form>
+    </table>
+
+    <!--    CREATE BUTTON    -->
+    <a th:href="@{/contract/contract-detail/create}" class="btn btn-primary">Create</a>
+
+    <!--  REMOVE BUTTON  -->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalRemove">Remove</button>
+
+    <!--  REMOVE MODAL  -->
+    <div class="modal fade" id="exampleModalRemove"
+         tabindex="-1"
+         aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabelRemove">Contract Detail Remover</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <p>Are you sure you want to remove these contract detail?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">
+              <label for="button-remove">
+                Remove
+              </label>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--    PAGINATION    -->
+    <div>
+      <ul class="pagination">
+        <li th:if="${contractDetailPage.hasPrevious()}" class="page-item">
+          <a class="page-link" th:href="@{/contract/contract-detail/(page=${currentPage - 1},name=${name})}">Previous</a>
+        </li>
+        <li class="page-item">
+          <span class="page-link" th:text="${currentPage + 1}"></span>
+        </li>
+        <li th:if="${contractDetailPage.hasNext()}" class="page-item">
+          <a class="page-link" th:href="@{/contract/contract-detail/(page=${currentPage + 1},name=${name})}">Next</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

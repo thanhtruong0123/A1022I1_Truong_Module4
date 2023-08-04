@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Detail</title>
+</head>
+<body>
+  <div class="container">
+    <div th:insert="~{/fragment/navbar :: navbar}"></div>
+
+    <form method="post" th:object="${contractDetail}" class="col col-md-4">
+        <div class="mb-2">
+            <label class="form-label">Contract</label>
+            <select class="form-select" th:field="*{contract}">
+                <option th:each="c : ${contracts}" th:value="${c.id}" th:text="Contract + ${c.id}"></option>
+            </select>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Attach Service</label>
+            <select class="form-select" th:field="*{attachService}">
+                <option th:each="a : ${attachServices}" th:value="${a.id}" th:text="${a.name}"></option>
+            </select>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Quantity</label>
+            <input type="number" class="form-control" th:field="*{quantity}">
+        </div>
+        <button class="btn btn-primary">Create</button>
+    </form>
+  </div>
+</body>
+</html>

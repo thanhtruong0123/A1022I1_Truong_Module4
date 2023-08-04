@@ -51,7 +51,14 @@
                     <td th:text="${book.author}"></td>
                     <td th:text="${book.description}"></td>
                     <td th:text="${book.quantity}"></td>
-                    <td><input type="checkbox" name="selectedBookIds" th:value="${book.id}"></td>
+                    <td>
+                        <span th:if="${book.quantity > 0}">
+                            <input type="checkbox" name="selectedBookIds" th:value="${book.id}">
+                        </span>
+                        <span th:if="${book.quantity <= 0}" style="color: darkgray">
+                            Out of stock
+                        </span>
+                    </td>
                 </tr>
                 </tbody>
                 <tfoot>

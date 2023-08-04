@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<body>
+    <div class="container">
+        <div th:insert="~{/fragment/navbar :: navbar}"></div>
+
+        <h1>Update</h1>
+        <form method="post" th:object="${customer}">
+            <table>
+                <tr style="display: none">
+                    <th scope="row">Id: </th>
+                    <td><input type="text" th:id="id" th:name="id" th:value="${customer.id}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Name: </th>
+                    <td><input type="text" th:id="name" th:name="name" th:value="${customer.name}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Gender: </th>
+                    <td>
+                        <select th:field="*{gender}">
+                            <option th:value="true">Male</option>
+                            <option th:value="false">Female</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Id Card: </th>
+                    <td><input type="text" th:id="idCard" th:name="idCard" th:value="${customer.idCard}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Birthday: </th>
+                    <td><input type="date" th:id="birthday" th:name="birthday" th:value="${customer.birthday}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Phone: </th>
+                    <td><input type="text" th:id="phone" th:name="phone" th:value="${customer.phone}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Email: </th>
+                    <td><input type="text" th:id="email" th:name="email" th:value="${customer.email}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Address: </th>
+                    <td><input type="text" th:id="address" th:name="address" th:value="${customer.address}"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Customer Type: </th>
+                    <td>
+                        <select th:field="*{customerType}">
+                            <option th:each="c : ${customerTypeList}" th:value="${c.id}" th:text="${c.name}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button class="btn btn-primary">Update</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create House</title>
+</head>
+<body>
+  <div class="container">
+    <div th:insert="~{/fragment/navbar :: navbar}"></div>
+
+    <form method="post" th:object="${serviceModel}">
+      <h1>Create</h1>
+      <!--      SERVICE TYPE-->
+      <div class="mb-3">
+        <label for="serviceType" class="form-label">Service type</label>
+        <input type="text" class="form-control" id="serviceType" th:value="${serviceModel.serviceType.name}">
+        <input type="text" style="display: none" class="form-control" th:id="serviceType" th:name="serviceType" th:value="${serviceModel.serviceType.id}">
+      </div>
+      <!--      NAME-->
+      <div class="mb-3">
+        <label for="serviceName" class="form-label">Name</label>
+        <input type="text" class="form-control" id="serviceName" th:field="*{name}">
+      </div>
+      <!--      AREA-->
+      <div class="mb-3">
+        <label for="area" class="form-label">Area</label>
+        <input type="number" class="form-control" id="area" th:field="*{area}">
+      </div>
+      <!--      MAX PEOPLE-->
+      <div class="mb-3">
+        <label for="maxPeople" class="form-label">Max people</label>
+        <input type="number" class="form-control" id="maxPeople" th:field="*{maxPeople}">
+      </div>
+      <!--      RENT TYPE-->
+      <div class="mb-3">
+        <label for="rentType" class="form-label">Rent Type</label>
+        <select id="rentType" th:field="*{rentType}">
+          <option th:each="r : ${rentTypeList}" th:value="${r.id}" th:text="${r.name}"></option>
+        </select>
+      </div>
+      <!--      COST-->
+      <div class="mb-3">
+        <label for="cost" class="form-label">Cost</label>
+        <input type="number" class="form-control" id="cost" th:field="*{cost}">
+      </div>
+      <!--      Standard Room-->
+      <div class="mb-3">
+        <label for="standardRoom" class="form-label">Standard Room</label>
+        <input type="text" class="form-control" id="standardRoom" th:field="*{standardRoom}">
+      </div>
+      <!--      Other Convenience-->
+      <div class="mb-3">
+        <label for="otherConvenience" class="form-label">Other Convenience</label>
+        <input type="text" class="form-control" id="otherConvenience" th:field="*{otherConvenience}">
+      </div>
+      <!--      Floor Numbers-->
+      <div class="mb-3">
+        <label for="floorNumber" class="form-label">Floor Numbers</label>
+        <input type="number" class="form-control" id="floorNumber" th:field="*{floorNumber}">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
